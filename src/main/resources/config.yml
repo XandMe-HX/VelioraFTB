@@ -1,26 +1,252 @@
-# ==========================================
-# VelioraVein Configuration
-# ==========================================
+# ============================================================
+# VelioraFTB 2.0
+# Semua pengaturan plugin berada di file ini.
+# Jalankan /velioraftb reload setelah mengubah konfigurasi.
+# ============================================================
 
 settings:
-  require-sneak: true
+  require-vault-economy: true
+  # Pengaman absolut agar salah ketik config tidak membekukan server.
+  # Nilai ini juga tetap bisa kamu ubah.
+  absolute-scan-limit: 2048
 
-prices:
-  vein: 10000
-  tree: 10000
-  farmer: 10000
-
-duration:
-  hours: 3
-
-reminder:
-  enabled: true
-  interval-minutes: 20
-
-limits:
-  vein-max-blocks: 64
-  tree-max-blocks: 128
-  farmer-max-blocks: 64
+# Kosongkan enabled-worlds agar skill bisa dipakai di semua dunia.
+# Nama dunia tidak peka huruf besar/kecil.
+worlds:
+  enabled-worlds: []
+  disabled-worlds:
+    - lobby
 
 data:
   auto-save-minutes: 5
+  migrate-legacy-folder: true
+  legacy-folder-name: VelioraVein
+
+reminders:
+  enabled: true
+  interval-minutes: 30
+  check-interval-seconds: 30
+  warning-minutes:
+    - 10
+    - 5
+    - 1
+
+skills:
+  vein:
+    enabled: true
+    display-name: "Vein Miner"
+    permission: "velioraftb.skill.vein"
+    price: 10000
+    duration-minutes: 180
+    require-sneak: true
+    max-blocks: 64
+    connect-diagonally: true
+    allowed-tools:
+      - WOODEN_PICKAXE
+      - STONE_PICKAXE
+      - IRON_PICKAXE
+      - GOLDEN_PICKAXE
+      - DIAMOND_PICKAXE
+      - NETHERITE_PICKAXE
+    allowed-blocks:
+      - COAL_ORE
+      - DEEPSLATE_COAL_ORE
+      - COPPER_ORE
+      - DEEPSLATE_COPPER_ORE
+      - IRON_ORE
+      - DEEPSLATE_IRON_ORE
+      - GOLD_ORE
+      - DEEPSLATE_GOLD_ORE
+      - REDSTONE_ORE
+      - DEEPSLATE_REDSTONE_ORE
+      - EMERALD_ORE
+      - DEEPSLATE_EMERALD_ORE
+      - LAPIS_ORE
+      - DEEPSLATE_LAPIS_ORE
+      - DIAMOND_ORE
+      - DEEPSLATE_DIAMOND_ORE
+      - NETHER_GOLD_ORE
+      - NETHER_QUARTZ_ORE
+      - ANCIENT_DEBRIS
+
+  tree:
+    enabled: true
+    display-name: "Tree Feller"
+    permission: "velioraftb.skill.tree"
+    price: 10000
+    duration-minutes: 180
+    require-sneak: true
+    max-logs: 128
+    max-horizontal-distance: 7
+    max-vertical-distance: 48
+    require-natural-leaves: true
+    break-leaves: true
+    leaf-radius: 4
+    max-leaves: 512
+    leaf-delay-ticks: 2
+    leaf-drops: true
+    only-natural-leaves: true
+    allowed-tools:
+      - WOODEN_AXE
+      - STONE_AXE
+      - IRON_AXE
+      - GOLDEN_AXE
+      - DIAMOND_AXE
+      - NETHERITE_AXE
+    allowed-logs:
+      - OAK_LOG
+      - OAK_WOOD
+      - SPRUCE_LOG
+      - SPRUCE_WOOD
+      - BIRCH_LOG
+      - BIRCH_WOOD
+      - JUNGLE_LOG
+      - JUNGLE_WOOD
+      - ACACIA_LOG
+      - ACACIA_WOOD
+      - DARK_OAK_LOG
+      - DARK_OAK_WOOD
+      - MANGROVE_LOG
+      - MANGROVE_WOOD
+      - MANGROVE_ROOTS
+      - CHERRY_LOG
+      - CHERRY_WOOD
+      - PALE_OAK_LOG
+      - PALE_OAK_WOOD
+      - CRIMSON_STEM
+      - CRIMSON_HYPHAE
+      - WARPED_STEM
+      - WARPED_HYPHAE
+    allowed-leaves:
+      - OAK_LEAVES
+      - SPRUCE_LEAVES
+      - BIRCH_LEAVES
+      - JUNGLE_LEAVES
+      - ACACIA_LEAVES
+      - DARK_OAK_LEAVES
+      - MANGROVE_LEAVES
+      - CHERRY_LEAVES
+      - PALE_OAK_LEAVES
+      - AZALEA_LEAVES
+      - FLOWERING_AZALEA_LEAVES
+      - NETHER_WART_BLOCK
+      - WARPED_WART_BLOCK
+
+  farmer:
+    enabled: true
+    display-name: "Farmer"
+    permission: "velioraftb.skill.farmer"
+    price: 10000
+    duration-minutes: 180
+    require-sneak: true
+    max-crops: 64
+    connect-diagonally: true
+    replant: true
+    allowed-tools:
+      - WOODEN_HOE
+      - STONE_HOE
+      - IRON_HOE
+      - GOLDEN_HOE
+      - DIAMOND_HOE
+      - NETHERITE_HOE
+    allowed-crops:
+      - WHEAT
+      - CARROTS
+      - POTATOES
+      - BEETROOTS
+      - NETHER_WART
+
+gui:
+  title: "&8VelioraFTB Skill Shop"
+  size: 9
+  filler:
+    enabled: true
+    material: BLACK_STAINED_GLASS_PANE
+    name: " "
+  slots:
+    vein: 3
+    tree: 4
+    farmer: 5
+  items:
+    vein:
+      material: DIAMOND_PICKAXE
+      name: "&b&lVein Miner"
+      lore:
+        - "&8&m------------------------"
+        - "&fAlat: &bPickaxe"
+        - "&fFungsi:"
+        - "&7Menambang ore sejenis yang saling"
+        - "&7terhubung. Hanya bekerja pada ore."
+        - ""
+        - "&fCara pakai: &eShift + hancurkan ore"
+        - "&fBatas: &e{max_blocks} ore sekali jalan"
+        - "&fWaktu: &e{duration}"
+        - "&fHarga: &a${price}"
+        - ""
+        - "&fStatus: {status}"
+        - "{remaining_line}"
+        - "&8&m------------------------"
+    tree:
+      material: DIAMOND_AXE
+      name: "&a&lTree Feller"
+      lore:
+        - "&8&m------------------------"
+        - "&fAlat: &aAxe"
+        - "&fFungsi:"
+        - "&7Menebang satu pohon yang log-nya"
+        - "&7tersambung dan merontokkan daunnya."
+        - "&7Bukan hanya satu kali tebang."
+        - ""
+        - "&fCara pakai: &eShift + tebang batang"
+        - "&fBatas: &e{max_blocks} log per pohon"
+        - "&fWaktu: &e{duration}"
+        - "&fHarga: &a${price}"
+        - ""
+        - "&fStatus: {status}"
+        - "{remaining_line}"
+        - "&8&m------------------------"
+    farmer:
+      material: DIAMOND_HOE
+      name: "&e&lFarmer"
+      lore:
+        - "&8&m------------------------"
+        - "&fAlat: &eHoe"
+        - "&fFungsi:"
+        - "&7Memanen tanaman yang sudah matang"
+        - "&7dan langsung menanamnya kembali."
+        - ""
+        - "&fCara pakai: &eShift + panen crop"
+        - "&fBatas: &e{max_blocks} crop sekali jalan"
+        - "&fWaktu: &e{duration}"
+        - "&fHarga: &a${price}"
+        - ""
+        - "&fStatus: {status}"
+        - "{remaining_line}"
+        - "&8&m------------------------"
+  status:
+    active: "&aAktif"
+    inactive: "&eKlik untuk membeli"
+    disabled: "&cDinonaktifkan"
+    no-permission: "&cTidak memiliki izin"
+    remaining-line: "&fSisa waktu: &a{time}"
+    click-line: "&eKlik untuk langsung mengaktifkan"
+
+messages:
+  prefix: "&6[VelioraFTB] &r"
+  player-only: "{prefix}&cPerintah ini hanya dapat digunakan oleh pemain."
+  no-permission: "{prefix}&cKamu tidak memiliki izin."
+  reloaded: "{prefix}&aSeluruh config.yml berhasil dimuat ulang."
+  vault-unavailable: "{prefix}&cVault Economy tidak tersedia."
+  skill-disabled: "{prefix}&cSkill {skill} sedang dinonaktifkan."
+  purchased: "{prefix}&a{skill} langsung aktif selama &e{duration}&a. Uang terpotong &e${price}&a."
+  already-active: "{prefix}&e{skill} masih aktif selama &a{time}&e. Tunggu habis sebelum membeli lagi."
+  insufficient-funds: "{prefix}&cUang tidak cukup. Kamu membutuhkan &e${price}&c."
+  reminder: "{prefix}&e{skill} masih aktif. Sisa waktu: &a{time}"
+  warning: "{prefix}&e{skill} akan berakhir dalam &c{time}&e."
+  expired: "{prefix}&cWaktu {skill} sudah habis. Kamu sekarang dapat membelinya lagi."
+  status-header: "{prefix}&fStatus skill kamu:"
+  status-line: "&7- &f{skill}: {status}"
+  status-active: "&aaktif, tersisa {time}"
+  status-inactive: "&ctidak aktif"
+  sneak-required: "{prefix}&eGunakan Shift saat memakai {skill}."
+  invalid-command: "{prefix}&eGunakan /velioraftb, /velioraftb status, atau /velioraftb reload."

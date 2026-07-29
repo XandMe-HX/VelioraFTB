@@ -7,12 +7,12 @@
     <modelVersion>4.0.0</modelVersion>
 
     <groupId>id.velioragardens</groupId>
-    <artifactId>VelioraVein</artifactId>
-    <version>1.0.0</version>
+    <artifactId>VelioraFTB</artifactId>
+    <version>2.0.0</version>
     <packaging>jar</packaging>
 
-    <name>VelioraVein</name>
-    <description>Skill-based Vein Miner, Tree Feller, and Farmer plugin for Veliora Gardens.</description>
+    <name>VelioraFTB</name>
+    <description>Configurable Farmer, Tree Feller, and Vein Miner skills for Veliora Gardens.</description>
 
     <properties>
         <java.version>21</java.version>
@@ -51,6 +51,14 @@
 
     <build>
         <defaultGoal>clean package</defaultGoal>
+        <finalName>VelioraFTB-${project.version}</finalName>
+
+        <resources>
+            <resource>
+                <directory>src/main/resources</directory>
+                <filtering>true</filtering>
+            </resource>
+        </resources>
 
         <plugins>
             <plugin>
