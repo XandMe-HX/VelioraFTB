@@ -4,6 +4,7 @@ import id.velioragardens.velioraftb.VelioraFTB;
 import id.velioragardens.velioraftb.util.BlockScanner;
 import id.velioragardens.velioraftb.util.MaterialUtil;
 import id.velioragardens.velioraftb.util.TextUtil;
+import id.velioragardens.velioraftb.util.TreeEffectUtil;
 import org.bukkit.Material;
 import org.bukkit.block.Block;
 import org.bukkit.entity.Player;
@@ -106,6 +107,7 @@ public final class TreeListener implements Listener {
                 if (!player.isOnline() || !plugin.getSkillManager().canUseSkill(player, "tree")) {
                     return;
                 }
+                TreeEffectUtil.play(plugin, logs);
                 for (Block log : logs) {
                     if (!logsAllowed.contains(log.getType())
                             || !toolsAllowed.contains(player.getInventory().getItemInMainHand().getType())) {
@@ -113,6 +115,7 @@ public final class TreeListener implements Listener {
                     }
                     breakAsPlayer(player, log);
                 }
+                TreeEffectUtil.playFinishSound(plugin, logs);
                 scheduleLeaves(player, leaves, leavesAllowed);
             } finally {
                 pending.remove(startKey);

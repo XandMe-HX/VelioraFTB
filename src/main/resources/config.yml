@@ -86,6 +86,31 @@ skills:
     leaf-delay-ticks: 2
     leaf-drops: true
     only-natural-leaves: true
+    effects:
+      enabled: true
+      sounds:
+        start:
+          enabled: true
+          sound: ENTITY_PLAYER_ATTACK_SWEEP
+          volume: 0.9
+          pitch: 0.9
+        finish:
+          enabled: true
+          sound: BLOCK_WOOD_BREAK
+          volume: 1.2
+          pitch: 0.75
+      circle:
+        enabled: true
+        # Cincin partikel bergerak dari bawah hingga puncak pohon.
+        primary-particle: HAPPY_VILLAGER
+        secondary-particle: COMPOSTER
+        points: 28
+        duration-ticks: 18
+        interval-ticks: 2
+        radius-padding: 1.25
+        min-radius: 2.0
+        max-radius: 7.0
+        height-offset: 0.5
     allowed-tools:
       - WOODEN_AXE
       - STONE_AXE
