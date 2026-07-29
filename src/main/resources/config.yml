@@ -41,6 +41,28 @@ skills:
     require-sneak: true
     max-blocks: 64
     connect-diagonally: true
+    # Efek hanya muncul ketika Vein Miner benar-benar menemukan beberapa ore.
+    effects:
+      enabled: true
+      sounds:
+        start:
+          enabled: true
+          sound: BLOCK_AMETHYST_BLOCK_HIT
+          volume: 0.9
+          pitch: 1.35
+        finish:
+          enabled: true
+          sound: BLOCK_STONE_BREAK
+          volume: 1.0
+          pitch: 1.15
+      particles:
+        enabled: true
+        # Kilatan mengikuti posisi ore yang ikut dihancurkan.
+        primary-particle: ELECTRIC_SPARK
+        secondary-particle: CRIT
+        amount-per-block: 5
+        max-effect-blocks: 48
+        spread: 0.18
     allowed-tools:
       - WOODEN_PICKAXE
       - STONE_PICKAXE
@@ -99,7 +121,7 @@ skills:
           sound: BLOCK_WOOD_BREAK
           volume: 1.2
           pitch: 0.75
-      circle:
+      particles:
         enabled: true
         # Cincin partikel bergerak dari bawah hingga puncak pohon.
         primary-particle: HAPPY_VILLAGER
@@ -167,6 +189,28 @@ skills:
     max-crops: 64
     connect-diagonally: true
     replant: true
+    # Efek hanya muncul ketika Farmer benar-benar memanen crop matang.
+    effects:
+      enabled: true
+      sounds:
+        start:
+          enabled: true
+          sound: ITEM_HOE_TILL
+          volume: 0.9
+          pitch: 1.15
+        finish:
+          enabled: true
+          sound: BLOCK_GRASS_BREAK
+          volume: 0.8
+          pitch: 1.3
+      particles:
+        enabled: true
+        # Gelombang hijau bergerak melewati crop yang sedang dipanen.
+        primary-particle: COMPOSTER
+        secondary-particle: HAPPY_VILLAGER
+        amount-per-crop: 3
+        max-effect-crops: 48
+        interval-ticks: 1
     allowed-tools:
       - WOODEN_HOE
       - STONE_HOE
