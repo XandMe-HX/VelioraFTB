@@ -1,0 +1,56 @@
+# ==========================================
+# VelioraVein Messages
+# ==========================================
+
+prefix: "&6[Veliora] &r"
+
+general:
+  player-only: "{prefix}&cPerintah ini hanya dapat digunakan oleh pemain."
+  no-permission: "{prefix}&cKamu tidak memiliki izin untuk melakukan itu."
+
+shop:
+  purchased: "{prefix}&aBerhasil membeli &e{skill} &aselama &63 jam&a!"
+  already-active: "{prefix}&eSkill &6{skill} &emasih aktif."
+  not-enough-money: "{prefix}&cUangmu tidak mencukupi.&7 Cari uang terlebih dahulu lalu coba lagi."
+
+skill:
+  sneak-reminder: "{prefix}&7Gunakan &eShift &7saat menggunakan skill ini."
+
+reminder:
+  active: "{prefix}&7Skill &e{skill} &7masih aktif. &fSisa waktu: &a{time}"
+  expire-10m: "{prefix}&eSkill &6{skill} &eakan berakhir dalam &c10 menit&e."
+  expire-5m: "{prefix}&eSkill &6{skill} &eakan berakhir dalam &c5 menit&e."
+  expire-1m: "{prefix}&eSkill &6{skill} &eakan berakhir dalam &c1 menit&e."
+  expired: "{prefix}&cSkill &6{skill} &ctelah berakhir. &7Beli kembali melalui &e/skill&7."
+
+gui:
+  title: "&8Skill Shop"
+  vein:
+    name: "&6⛏ Vein Miner"
+    desc:
+      - "&7&m-------------------"
+      - "&fFungsi: &bMenambang ore"
+      - "&bsecara instan."
+      - "&fHarga: &a$10.000"
+      - "&7&m-------------------"
+  tree:
+    name: "&6🪓 Tree Feller"
+    desc:
+      - "&7&m-------------------"
+      - "&fFungsi: &bMenebang pohon"
+      - "&bsecara instan."
+      - "&fHarga: &a$10.000"
+      - "&7&m-------------------"
+  farmer:
+    name: "&6🌾 Farmer"
+    desc:
+      - "&7&m-------------------"
+      - "&fFungsi: &bPanen otomatis"
+      - "&barea luas."
+      - "&fHarga: &a$10.000"
+      - "&7&m-------------------"
+
+  price: "&7Harga: &a$10.000"
+  duration: "&7Durasi: &e3 Jam"
+  click-buy: "&eKlik untuk membeli."
+  owned: "&aSedang Aktif"
