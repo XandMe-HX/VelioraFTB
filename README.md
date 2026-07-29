@@ -22,4 +22,6 @@ Plugin Paper 1.21.8 untuk tiga skill berbatas waktu:
 - Skill tidak bisa dibeli ulang sebelum waktunya berakhir.
 - Pengingat sisa waktu default setiap `30 menit`.
 - Semua harga, durasi, batas blok, tool, ore, crop, dunia, GUI, dan pesan dapat diubah dari `config.yml`.
+- Tree Feller memiliki suara tebang dan animasi cincin partikel yang mengelilingi tinggi pohon.
+- Sound, jenis partikel, radius, kepadatan, dan durasi efek Tree Feller dapat diatur dari `config.yml`.
 - Data lama dari folder `plugins/VelioraVein` dapat dimigrasikan otomatis.
