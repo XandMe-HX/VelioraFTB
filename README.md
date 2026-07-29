@@ -1,9 +1,10 @@
-# VelioraVein
+# VelioraFTB
 
-A premium, lightweight Minecraft Paper 1.21.8 plugin that implements three powerful skills:
-1. **Vein Miner** - Mine connected ores in a chain while crouching.
-2. **Tree Feller** - Chop down entire trees of the same wood type instantly, including leaf decay.
-3. **Farmer** - Harvest fully grown crops in a cascading pattern and replant automatically.
+Plugin Paper 1.21.8 untuk tiga skill berbatas waktu:
+
+1. **Vein Miner** — menambang kumpulan ore sejenis yang saling terhubung.
+2. **Tree Feller** — menebang satu struktur pohon, bukan satu kali pakai; daun alaminya ikut rontok.
+3. **Farmer** — memanen tanaman matang dan langsung menanamnya kembali.
 
 ## Requirements
 - **Server:** Paper 1.21.8 or higher
@@ -11,10 +12,14 @@ A premium, lightweight Minecraft Paper 1.21.8 plugin that implements three power
 - **Economy:** Vault & an active economy plugin (e.g., EssentialsX)
 
 ## Commands
-- `/skill` or `/skills` - Open the visual Skill GUI.
+- `/velioraftb` — membuka GUI pembelian skill.
+- `/velioraftb status` — melihat sisa waktu semua skill.
+- `/velioraftb reload` — memuat ulang seluruh `config.yml`.
 
 ## Features
-- **Vault Economy Support:** Cost-based skill purchases.
-- **Duration Control:** Clean timed expiration tracked in `players.yml`.
-- **Dynamic Reminders:** Auto-broadcasts countdown warnings (10, 5, 1 mins) and expiries.
-- **Optimized Scanning:** Uses non-recursive Breadth-First Search (BFS) to prevent stack overflows and lag.
+- Harga default setiap skill: `10.000` melalui Vault.
+- Durasi default setiap pembelian: `3 jam`.
+- Skill tidak bisa dibeli ulang sebelum waktunya berakhir.
+- Pengingat sisa waktu default setiap `30 menit`.
+- Semua harga, durasi, batas blok, tool, ore, crop, dunia, GUI, dan pesan dapat diubah dari `config.yml`.
+- Data lama dari folder `plugins/VelioraVein` dapat dimigrasikan otomatis.

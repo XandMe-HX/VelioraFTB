@@ -1,30 +1,42 @@
-name: VelioraVein
+name: VelioraFTB
 version: '${project.version}'
-main: id.velioragardens.velioravein.VelioraVein
+main: id.velioragardens.velioraftb.VelioraFTB
 api-version: '1.21'
 
 author: XandMe-HX
-website: https://github.com/XandMe-HX/VelioraVein
+website: https://github.com/XandMe-HX/VelioraFTB
 
-description: Skill-based Vein Miner, Tree Feller, and Farmer plugin.
+description: Configurable Farmer, Tree Feller, and Vein Miner skills.
 
 depend:
   - Vault
 
 commands:
-  vgvein:
-    description: Open the VelioraVein skill shop.
-    usage: /vgvein
+  velioraftb:
+    description: Membuka menu VelioraFTB.
+    usage: /velioraftb [status|reload]
     aliases:
-      - vein
-      - vvein
-    permission: velioravein.use
+      - vftb
+      - ftbskills
+    permission: velioraftb.use
 
 permissions:
-  velioravein.use:
-    description: Allows players to use /vgvein.
+  velioraftb.use:
+    description: Mengizinkan pemain membuka menu VelioraFTB.
     default: true
 
-  velioravein.admin:
-    description: Administrative permission.
+  velioraftb.skill.vein:
+    description: Mengizinkan penggunaan Vein Miner.
+    default: true
+
+  velioraftb.skill.tree:
+    description: Mengizinkan penggunaan Tree Feller.
+    default: true
+
+  velioraftb.skill.farmer:
+    description: Mengizinkan penggunaan Farmer.
+    default: true
+
+  velioraftb.admin:
+    description: Mengizinkan reload konfigurasi VelioraFTB.
     default: op
