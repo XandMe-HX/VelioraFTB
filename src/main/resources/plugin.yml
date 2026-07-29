@@ -17,6 +17,7 @@ commands:
     usage: /velioraftb [status|reload]
     aliases:
       - vftb
+      - ftb
       - ftbskills
     permission: velioraftb.use
 
