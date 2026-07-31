@@ -1,6 +1,7 @@
 package id.velioragardens.velioraftb;
 
 import id.velioragardens.velioraftb.command.FTBCommand;
+import id.velioragardens.velioraftb.listener.FarmlandProtectionListener;
 import id.velioragardens.velioraftb.gui.SkillGUI;
 import id.velioragardens.velioraftb.listener.FarmerListener;
 import id.velioragardens.velioraftb.listener.TreeListener;
@@ -49,6 +50,7 @@ public final class VelioraFTB extends JavaPlugin {
         getServer().getPluginManager().registerEvents(new VeinListener(this), this);
         getServer().getPluginManager().registerEvents(new TreeListener(this), this);
         getServer().getPluginManager().registerEvents(new FarmerListener(this), this);
+        getServer().getPluginManager().registerEvents(new FarmlandProtectionListener(), this);
 
         dataManager.startAutoSave();
         reminderManager.start();
