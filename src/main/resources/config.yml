@@ -58,11 +58,14 @@ skills:
       particles:
         enabled: true
         # Kilatan mengikuti posisi ore yang ikut dihancurkan.
-        primary-particle: ELECTRIC_SPARK
+        primary-particle: END_ROD
         secondary-particle: CRIT
-        amount-per-block: 5
+        # Kilatan putih + kritikal dibuat lebih jelas, dengan serpihan ore kecil.
+        amount-per-block: 8
+        secondary-amount-per-block: 5
+        block-particle-amount: 2
         max-effect-blocks: 48
-        spread: 0.18
+        spread: 0.22
     allowed-tools:
       - WOODEN_PICKAXE
       - STONE_PICKAXE
@@ -206,9 +209,11 @@ skills:
       particles:
         enabled: true
         # Gelombang hijau bergerak melewati crop yang sedang dipanen.
-        primary-particle: COMPOSTER
-        secondary-particle: HAPPY_VILLAGER
-        amount-per-crop: 3
+        primary-particle: HAPPY_VILLAGER
+        secondary-particle: COMPOSTER
+        # Sedikit lebih tebal, tetapi tetap ringan dan smooth.
+        amount-per-crop: 5
+        secondary-amount-per-crop: 3
         max-effect-crops: 48
         interval-ticks: 1
     allowed-tools:
