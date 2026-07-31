@@ -47,7 +47,7 @@ public final class SkillEffectUtil {
         Bounds bounds = findBounds(ores);
         World world = ores.getFirst().getWorld();
         playSound(plugin, world, bounds.center(world), root + "sounds.start", Sound.BLOCK_AMETHYST_BLOCK_HIT);
-        playBlockTrail(plugin, ores, root + "particles.", Particle.ELECTRIC_SPARK, Particle.CRIT);
+        playBlockTrail(plugin, ores, root + "particles.", Particle.END_ROD, Particle.CRIT);
     }
 
     public static void playVeinFinish(VelioraFTB plugin, List<Block> ores) {
@@ -151,6 +151,10 @@ public final class SkillEffectUtil {
         Particle primary = readParticle(plugin, root + "primary-particle", primaryFallback);
         Particle secondary = readParticle(plugin, root + "secondary-particle", secondaryFallback);
         int amount = clamp(plugin.getConfig().getInt(root + "amount-per-block", 5), 1, 16);
+        int secondaryAmount = clamp(plugin.getConfig().getInt(
+                root + "secondary-amount-per-block", Math.max(1, amount / 2)
+        ), 1, 16);
+        int blockAmount = clamp(plugin.getConfig().getInt(root + "block-particle-amount", 0), 0, 8);
         int maxBlocks = clamp(plugin.getConfig().getInt(root + "max-effect-blocks", 48), 1, 128);
         double spread = clamp(plugin.getConfig().getDouble(root + "spread", 0.18D), 0.0D, 1.0D);
 
@@ -158,8 +162,13 @@ public final class SkillEffectUtil {
         for (int index = 0; index < blocks.size(); index += step) {
             Location location = blocks.get(index).getLocation().add(0.5D, 0.5D, 0.5D);
             location.getWorld().spawnParticle(primary, location, amount, spread, spread, spread, 0.01D);
-            location.getWorld().spawnParticle(secondary, location, Math.max(1, amount / 2),
+            location.getWorld().spawnParticle(secondary, location, secondaryAmount,
                     spread / 2.0D, spread / 2.0D, spread / 2.0D, 0.0D);
+            if (blockAmount > 0) {
+                location.getWorld().spawnParticle(Particle.BLOCK, location, blockAmount,
+                        spread / 2.0D, spread / 2.0D, spread / 2.0D, 0.0D,
+                        blocks.get(index).getBlockData());
+            }
         }
     }
 
@@ -171,6 +180,9 @@ public final class SkillEffectUtil {
         Particle primary = readParticle(plugin, root + "primary-particle", Particle.COMPOSTER);
         Particle secondary = readParticle(plugin, root + "secondary-particle", Particle.HAPPY_VILLAGER);
         int amount = clamp(plugin.getConfig().getInt(root + "amount-per-crop", 3), 1, 12);
+        int secondaryAmount = clamp(plugin.getConfig().getInt(
+                root + "secondary-amount-per-crop", Math.max(1, amount / 2)
+        ), 1, 12);
         int maxCrops = clamp(plugin.getConfig().getInt(root + "max-effect-crops", 48), 1, 128);
         long interval = clamp(plugin.getConfig().getLong(root + "interval-ticks", 1L), 1L, 5L);
         int step = Math.max(1, (int) Math.ceil((double) crops.size() / maxCrops));
@@ -189,8 +201,9 @@ public final class SkillEffectUtil {
                 while (index < crops.size() && spawned < 8) {
                     Block crop = crops.get(index);
                     Location location = crop.getLocation().add(0.5D, 0.7D, 0.5D);
-                    Particle particle = (index / step) % 3 == 0 ? secondary : primary;
-                    location.getWorld().spawnParticle(particle, location, amount, 0.25D, 0.15D, 0.25D, 0.01D);
+                    location.getWorld().spawnParticle(primary, location, amount, 0.25D, 0.15D, 0.25D, 0.01D);
+                    location.getWorld().spawnParticle(secondary, location, secondaryAmount,
+                            0.16D, 0.10D, 0.16D, 0.0D);
                     index += step;
                     spawned++;
                 }
