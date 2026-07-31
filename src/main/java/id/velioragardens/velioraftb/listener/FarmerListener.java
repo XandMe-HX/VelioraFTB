@@ -3,6 +3,7 @@ package id.velioragardens.velioraftb.listener;
 import id.velioragardens.velioraftb.VelioraFTB;
 import id.velioragardens.velioraftb.util.BlockScanner;
 import id.velioragardens.velioraftb.util.MaterialUtil;
+import id.velioragardens.velioraftb.util.SkillEffectUtil;
 import id.velioragardens.velioraftb.util.TextUtil;
 import org.bukkit.Material;
 import org.bukkit.block.Block;
@@ -76,6 +77,7 @@ public final class FarmerListener implements Listener {
                     return;
                 }
                 boolean replant = plugin.getConfig().getBoolean("skills.farmer.replant", true);
+                SkillEffectUtil.playFarmerStart(plugin, crops);
                 for (Block crop : crops) {
                     if (!cropsAllowed.contains(crop.getType())
                             || !BlockScanner.isFullyGrown(crop)
@@ -87,6 +89,7 @@ public final class FarmerListener implements Listener {
                         replant(crop, cropType);
                     }
                 }
+                SkillEffectUtil.playFarmerFinish(plugin, crops);
             } finally {
                 pending.remove(startKey);
             }

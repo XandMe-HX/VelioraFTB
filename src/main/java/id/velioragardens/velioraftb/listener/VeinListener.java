@@ -3,6 +3,7 @@ package id.velioragardens.velioraftb.listener;
 import id.velioragardens.velioraftb.VelioraFTB;
 import id.velioragardens.velioraftb.util.BlockScanner;
 import id.velioragardens.velioraftb.util.MaterialUtil;
+import id.velioragardens.velioraftb.util.SkillEffectUtil;
 import id.velioragardens.velioraftb.util.TextUtil;
 import org.bukkit.Material;
 import org.bukkit.block.Block;
@@ -73,6 +74,7 @@ public final class VeinListener implements Listener {
                 if (!player.isOnline() || !plugin.getSkillManager().canUseSkill(player, "vein")) {
                     return;
                 }
+                SkillEffectUtil.playVeinStart(plugin, vein);
                 for (Block ore : vein) {
                     if (!ores.contains(ore.getType())
                             || !tools.contains(player.getInventory().getItemInMainHand().getType())) {
@@ -80,6 +82,7 @@ public final class VeinListener implements Listener {
                     }
                     breakAsPlayer(player, ore);
                 }
+                SkillEffectUtil.playVeinFinish(plugin, vein);
             } finally {
                 pending.remove(startKey);
             }
