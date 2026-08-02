@@ -17,8 +17,8 @@ Plugin Paper 1.21.8 untuk tiga skill berbatas waktu:
 - `/velioraftb reload` — memuat ulang seluruh `config.yml`.
 
 ## Features
-- Harga default setiap skill: `10.000` melalui Vault.
-- Durasi default setiap pembelian: `3 jam`.
+- Harga default setiap skill: `2.500` melalui Vault.
+- Durasi default setiap pembelian: `5 jam`.
 - Skill tidak bisa dibeli ulang sebelum waktunya berakhir.
 - Pengingat sisa waktu default setiap `30 menit`.
 - Semua harga, durasi, batas blok, tool, ore, crop, dunia, GUI, dan pesan dapat diubah dari `config.yml`.

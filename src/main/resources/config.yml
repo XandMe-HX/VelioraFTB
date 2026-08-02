@@ -36,8 +36,8 @@ skills:
     enabled: true
     display-name: "Vein Miner"
     permission: "velioraftb.skill.vein"
-    price: 10000
-    duration-minutes: 180
+    price: 2500
+    duration-minutes: 300
     require-sneak: true
     max-blocks: 64
     connect-diagonally: true
@@ -98,8 +98,8 @@ skills:
     enabled: true
     display-name: "Tree Feller"
     permission: "velioraftb.skill.tree"
-    price: 10000
-    duration-minutes: 180
+    price: 2500
+    duration-minutes: 300
     require-sneak: true
     max-logs: 128
     max-horizontal-distance: 7
@@ -186,8 +186,8 @@ skills:
     enabled: true
     display-name: "Farmer"
     permission: "velioraftb.skill.farmer"
-    price: 10000
-    duration-minutes: 180
+    price: 2500
+    duration-minutes: 300
     require-sneak: true
     max-crops: 64
     connect-diagonally: true

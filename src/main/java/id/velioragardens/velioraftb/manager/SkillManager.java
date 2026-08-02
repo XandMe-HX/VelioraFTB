@@ -160,7 +160,7 @@ public final class SkillManager {
     public long getDurationMillis(String skill) {
         long minutes = Math.max(
                 1L,
-                plugin.getConfig().getLong("skills." + normalize(skill) + ".duration-minutes", 180L)
+                plugin.getConfig().getLong("skills." + normalize(skill) + ".duration-minutes", 300L)
         );
         return minutes * 60_000L;
     }
@@ -168,7 +168,7 @@ public final class SkillManager {
     public double getPrice(String skill) {
         return Math.max(
                 0D,
-                plugin.getConfig().getDouble("skills." + normalize(skill) + ".price", 10_000D)
+                plugin.getConfig().getDouble("skills." + normalize(skill) + ".price", 2_500D)
         );
     }
 
