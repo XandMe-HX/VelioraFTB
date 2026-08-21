@@ -11,6 +11,9 @@ description: Configurable Farmer, Tree Feller, and Vein Miner skills.
 depend:
   - Vault
 
+softdepend:
+  - VelioraSuite
+
 commands:
   velioraftb:
     description: Membuka menu VelioraFTB.
