@@ -12,6 +12,7 @@ import org.bukkit.event.EventHandler;
 import org.bukkit.event.EventPriority;
 import org.bukkit.event.Listener;
 import org.bukkit.event.block.BlockBreakEvent;
+import org.bukkit.metadata.FixedMetadataValue;
 
 import java.util.HashMap;
 import java.util.HashSet;
@@ -92,9 +93,11 @@ public final class VeinListener implements Listener {
     private void breakAsPlayer(Player player, Block block) {
         String key = blockKey(block);
         processing.add(key);
+        player.setMetadata("velioraftb_vein_secondary", new FixedMetadataValue(plugin, true));
         try {
             player.breakBlock(block);
         } finally {
+            player.removeMetadata("velioraftb_vein_secondary", plugin);
             processing.remove(key);
         }
     }
