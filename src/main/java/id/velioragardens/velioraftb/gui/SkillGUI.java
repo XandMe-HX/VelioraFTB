@@ -32,7 +32,7 @@ public final class SkillGUI implements Listener {
     }
 
     public static void open(VelioraFTB plugin, Player player) {
-        int size = normalizeSize(plugin.getConfig().getInt("gui.size", 9));
+        int size = normalizeSize(plugin.getConfig().getInt("gui.size", 27));
         SkillMenuHolder holder = new SkillMenuHolder();
         Inventory inventory = Bukkit.createInventory(
                 holder,
@@ -51,6 +51,7 @@ public final class SkillGUI implements Listener {
             inventory.setItem(slot, createSkillItem(plugin, player, skill));
             holder.register(slot, skill);
         }
+        addModeItem(plugin, player, inventory, holder);
         player.openInventory(inventory);
     }
 
@@ -145,6 +146,19 @@ public final class SkillGUI implements Listener {
         return item;
     }
 
+    private static void addModeItem(VelioraFTB plugin, Player player, Inventory inventory, SkillMenuHolder holder) {
+        int slot = Math.min(inventory.getSize() - 1, plugin.getConfig().getInt("gui.mode-slot", 22));
+        boolean money = plugin.getSkillManager().isMoneyMode();
+        ItemStack item = new ItemStack(money ? Material.GOLD_INGOT : Material.LIME_DYE);
+        ItemMeta meta = item.getItemMeta();
+        if (meta != null) {
+            meta.displayName(TextUtil.color(money ? "&6&lMODE: PAKAI UANG" : "&a&lMODE: GRATIS"));
+            meta.lore(List.of(TextUtil.color(money ? "&7Skill aktif setelah pembayaran dan tetap memiliki durasi." : "&7Skill aktif gratis dan tetap memiliki durasi."), TextUtil.color(player.hasPermission("velioraftb.admin") ? "&eKlik untuk mengganti mode global." : "&8Hanya owner/admin yang dapat mengubah mode.")));
+            item.setItemMeta(meta);
+        }
+        inventory.setItem(slot, item); holder.register(slot, "__mode__");
+    }
+
     @EventHandler
     public void onInventoryClick(InventoryClickEvent event) {
         if (!(event.getView().getTopInventory().getHolder() instanceof SkillMenuHolder holder)) {
@@ -161,6 +175,12 @@ public final class SkillGUI implements Listener {
 
         String skill = holder.getSkill(event.getRawSlot());
         if (skill == null) {
+            return;
+        }
+        if (skill.equals("__mode__")) {
+            if (player.hasPermission("velioraftb.admin")) plugin.getSkillManager().setMoneyMode(!plugin.getSkillManager().isMoneyMode());
+            else TextUtil.send(plugin, player, "messages.no-permission");
+            open(plugin, player);
             return;
         }
         if (plugin.getSkillManager().purchaseSkill(player, skill)) {

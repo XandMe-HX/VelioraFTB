@@ -2,6 +2,10 @@
 # VelioraFTB 2.0
 # Semua pengaturan plugin berada di file ini.
 # Jalankan /velioraftb reload setelah mengubah konfigurasi.
+settings:
+  payment-mode:
+    # false = aktif gratis. true = harga Vault dipotong.
+    money: false
 # ============================================================
 
 settings:
@@ -232,7 +236,8 @@ skills:
 
 gui:
   title: "&8VelioraFTB Skill Shop"
-  size: 9
+  size: 27
+  mode-slot: 22
   filler:
     enabled: true
     material: BLACK_STAINED_GLASS_PANE
@@ -313,6 +318,11 @@ messages:
   vault-unavailable: "{prefix}&cVault Economy tidak tersedia."
   skill-disabled: "{prefix}&cSkill {skill} sedang dinonaktifkan."
   purchased: "{prefix}&a{skill} langsung aktif selama &e{duration}&a. Uang terpotong &e${price}&a."
+  free-activated: "{prefix}&a{skill} aktif gratis selama &e{duration}&a."
+  deactivated: "{prefix}&e{skill} dinonaktifkan. Kamu dapat mengaktifkannya lagi dari GUI."
+  mode-money: "{prefix}&aMode pembayaran aktif. Skill sekarang memakai uang Vault."
+  mode-free: "{prefix}&bMode gratis aktif. Skill dapat digunakan tanpa biaya."
+  mode-usage: "{prefix}&eGunakan: &f/ftb mode money <true|false>&e."
   already-active: "{prefix}&e{skill} masih aktif selama &a{time}&e. Tunggu habis sebelum membeli lagi."
   insufficient-funds: "{prefix}&cUang tidak cukup. Kamu membutuhkan &e${price}&c."
   reminder: "{prefix}&e{skill} masih aktif. Sisa waktu: &a{time}"

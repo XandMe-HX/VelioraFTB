@@ -56,6 +56,19 @@ public final class FTBCommand implements CommandExecutor, TabCompleter {
             return true;
         }
 
+        if (args[0].equalsIgnoreCase("mode")) {
+            if (!sender.hasPermission("velioraftb.admin")) { TextUtil.send(plugin, sender, "messages.no-permission"); return true; }
+            if (args.length != 3 || !args[1].equalsIgnoreCase("money")) { TextUtil.send(plugin, sender, "messages.mode-usage"); return true; }
+            String value = args[2].toLowerCase();
+            boolean money;
+            if (List.of("true", "enable", "enabled", "on").contains(value)) money = true;
+            else if (List.of("false", "disable", "disabled", "off").contains(value)) money = false;
+            else { TextUtil.send(plugin, sender, "messages.mode-usage"); return true; }
+            plugin.getSkillManager().setMoneyMode(money);
+            TextUtil.send(plugin, sender, money ? "messages.mode-money" : "messages.mode-free");
+            return true;
+        }
+
         TextUtil.send(plugin, sender, "messages.invalid-command");
         return true;
     }
@@ -89,13 +102,12 @@ public final class FTBCommand implements CommandExecutor, TabCompleter {
             @NotNull String alias,
             @NotNull String[] args
     ) {
-        if (args.length != 1) {
-            return List.of();
-        }
-
+        if (args.length == 2 && args[0].equalsIgnoreCase("mode") && sender.hasPermission("velioraftb.admin")) return List.of("money");
+        if (args.length == 3 && args[0].equalsIgnoreCase("mode") && args[1].equalsIgnoreCase("money") && sender.hasPermission("velioraftb.admin")) return List.of("true", "false", "enable", "disable");
+        if (args.length != 1) return List.of();
         List<String> suggestions = new ArrayList<>(List.of("menu", "status"));
         if (sender.hasPermission("velioraftb.admin")) {
-            suggestions.add("reload");
+            suggestions.add("reload"); suggestions.add("mode");
         }
         String typed = args[0].toLowerCase();
         return suggestions.stream().filter(value -> value.startsWith(typed)).toList();

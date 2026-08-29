@@ -38,17 +38,11 @@ public final class SkillManager {
             return false;
         }
 
-        if (isSkillActive(player.getUniqueId(), skill)) {
-            TextUtil.send(
-                    plugin,
-                    player,
-                    "messages.already-active",
-                    Map.of(
-                            "skill", displayName,
-                            "time", getRemainingFormatted(player.getUniqueId(), skill)
-                    )
-            );
-            return false;
+        if (isSkillActive(player.getUniqueId(), skill)) return deactivateSkill(player, skill);
+
+        if (!isMoneyMode()) {
+            activate(player, skill, false);
+            return true;
         }
 
         if (!plugin.getEconomyManager().isEnabled()) {
@@ -73,25 +67,30 @@ public final class SkillManager {
             return false;
         }
 
+        activate(player, skill, true);
+        return true;
+    }
+
+    public boolean isMoneyMode() { return plugin.getConfig().getBoolean("settings.payment-mode.money", false); }
+    public void setMoneyMode(boolean enabled) { plugin.getConfig().set("settings.payment-mode.money", enabled); plugin.saveConfig(); }
+
+    private boolean deactivateSkill(Player player, String skill) {
+        expireSkill(player.getUniqueId(), skill);
+        plugin.getReminderManager().reset(player.getUniqueId(), skill);
+        TextUtil.send(plugin, player, "messages.deactivated", Map.of("skill", getDisplayName(skill)));
+        player.playSound(player.getLocation(), Sound.BLOCK_LEVER_CLICK, 0.8F, 0.75F);
+        return true;
+    }
+
+    private void activate(Player player, String skill, boolean paid) {
         long duration = getDurationMillis(skill);
         PlayerSkillData data = plugin.getDataManager().getPlayerData(player.getUniqueId());
         setSkillExpire(data, skill, System.currentTimeMillis() + duration);
         plugin.getDataManager().savePlayerData(data);
         plugin.getReminderManager().reset(player.getUniqueId(), skill);
-
-        TextUtil.send(
-                plugin,
-                player,
-                "messages.purchased",
-                Map.of(
-                        "skill", displayName,
-                        "duration", TextUtil.formatDuration(duration),
-                        "time", TextUtil.formatDuration(duration),
-                        "price", TextUtil.formatMoney(price)
-                )
-        );
-        player.playSound(player.getLocation(), Sound.ENTITY_PLAYER_LEVELUP, 1.0F, 1.0F);
-        return true;
+        Map<String, String> values = Map.of("skill", getDisplayName(skill), "duration", TextUtil.formatDuration(duration), "time", TextUtil.formatDuration(duration), "price", TextUtil.formatMoney(getPrice(skill)));
+        TextUtil.send(plugin, player, paid ? "messages.purchased" : "messages.free-activated", values);
+        player.playSound(player.getLocation(), Sound.ENTITY_PLAYER_LEVELUP, 1.0F, paid ? 1.0F : 1.25F);
     }
 
     public boolean canUseSkill(Player player, String skill) {
