@@ -119,7 +119,7 @@ public final class SkillGUI implements Listener {
                     Map.of("time", plugin.getSkillManager().getRemainingFormatted(uuid, skill))
             );
         } else {
-            status = plugin.getConfig().getString("gui.status.inactive", "&eKlik untuk membeli");
+            status = plugin.getSkillManager().isMoneyMode() ? "&eBelum aktif — berbayar" : "&aBelum aktif — GRATIS";
             finalLine = plugin.getConfig().getString(
                     "gui.status.click-line",
                     "&eKlik untuk langsung mengaktifkan"
@@ -128,6 +128,7 @@ public final class SkillGUI implements Listener {
 
         Map<String, String> placeholders = new HashMap<>();
         placeholders.put("price", TextUtil.formatMoney(plugin.getSkillManager().getPrice(skill)));
+        if(!plugin.getSkillManager().isMoneyMode())placeholders.put("price","GRATIS (0)");
         placeholders.put(
                 "duration",
                 TextUtil.formatDuration(plugin.getSkillManager().getDurationMillis(skill))
@@ -137,6 +138,12 @@ public final class SkillGUI implements Listener {
         placeholders.put("max_blocks", String.valueOf(getMaxBlocks(plugin, skill)));
 
         List<Component> lore = new ArrayList<>();
+        lore.add(TextUtil.color(plugin.getSkillManager().isMoneyMode() ? "&6Aktivasi berikutnya: BERBAYAR" : "&aAktivasi berikutnya: GRATIS"));
+        if(active) {
+            String mode=plugin.getSkillManager().activationMode(uuid,skill);
+            lore.add(TextUtil.color("&7Sesi aktif: "+(mode.equals("paid")?"&6DIBELI":mode.equals("free")?"&aGRATIS":"&7LAMA (asal belum tercatat)")));
+            lore.add(TextUtil.color("&eKlik untuk mematikan; sisa waktu sesi akan hilang."));
+        }
         for (String line : plugin.getConfig().getStringList("gui.items." + skill + ".lore")) {
             String parsed = TextUtil.replace(line, placeholders);
             lore.add(parsed.isEmpty() ? Component.empty() : TextUtil.color(parsed));
@@ -147,7 +154,7 @@ public final class SkillGUI implements Listener {
     }
 
     private static void addModeItem(VelioraFTB plugin, Player player, Inventory inventory, SkillMenuHolder holder) {
-        int slot = Math.min(inventory.getSize() - 1, plugin.getConfig().getInt("gui.mode-slot", 22));
+        int slot = Math.max(0,Math.min(inventory.getSize() - 1, plugin.getConfig().getInt("gui.mode-slot", 22)));
         boolean money = plugin.getSkillManager().isMoneyMode();
         ItemStack item = new ItemStack(money ? Material.GOLD_INGOT : Material.LIME_DYE);
         ItemMeta meta = item.getItemMeta();

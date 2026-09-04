@@ -73,12 +73,14 @@ public final class DataManager {
 
     private PlayerSkillData loadPlayerData(UUID uuid) {
         String path = "players." + uuid;
-        return new PlayerSkillData(
+        PlayerSkillData data = new PlayerSkillData(
                 uuid,
                 config.getLong(path + ".vein", 0L),
                 config.getLong(path + ".tree", 0L),
                 config.getLong(path + ".farmer", 0L)
         );
+        for(String skill:java.util.List.of("vein","tree","farmer"))data.setActivationMode(skill,config.getString(path+".activation-mode."+skill,"legacy"));
+        return data;
     }
 
     public void savePlayerData(PlayerSkillData data) {
@@ -98,6 +100,7 @@ public final class DataManager {
         config.set(path + ".vein", data.getVeinExpire());
         config.set(path + ".tree", data.getTreeExpire());
         config.set(path + ".farmer", data.getFarmerExpire());
+        for(String skill:java.util.List.of("vein","tree","farmer"))config.set(path+".activation-mode."+skill,data.getActivationMode(skill));
     }
 
     private void saveFile() {
