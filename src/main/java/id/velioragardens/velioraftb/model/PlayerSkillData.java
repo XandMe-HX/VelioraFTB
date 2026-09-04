@@ -7,6 +7,9 @@ public class PlayerSkillData {
     private long veinExpire;
     private long treeExpire;
     private long farmerExpire;
+    private final java.util.Map<String,String> activationModes=new java.util.HashMap<>();
+    public String getActivationMode(String skill) { return activationModes.getOrDefault(skill,"legacy"); }
+    public void setActivationMode(String skill,String mode) { activationModes.put(skill,mode); }
 
     public PlayerSkillData(UUID uuid) {
         this.uuid = uuid;

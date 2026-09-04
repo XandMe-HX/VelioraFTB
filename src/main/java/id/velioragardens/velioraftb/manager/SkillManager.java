@@ -72,6 +72,7 @@ public final class SkillManager {
     }
 
     public boolean isMoneyMode() { return plugin.getConfig().getBoolean("settings.payment-mode.money", false); }
+    public String activationMode(UUID uuid,String skill) { return plugin.getDataManager().getPlayerData(uuid).getActivationMode(skill); }
     public void setMoneyMode(boolean enabled) { plugin.getConfig().set("settings.payment-mode.money", enabled); plugin.saveConfig(); }
 
     private boolean deactivateSkill(Player player, String skill) {
@@ -85,6 +86,7 @@ public final class SkillManager {
     private void activate(Player player, String skill, boolean paid) {
         long duration = getDurationMillis(skill);
         PlayerSkillData data = plugin.getDataManager().getPlayerData(player.getUniqueId());
+        data.setActivationMode(skill,paid?"paid":"free");
         setSkillExpire(data, skill, System.currentTimeMillis() + duration);
         plugin.getDataManager().savePlayerData(data);
         plugin.getReminderManager().reset(player.getUniqueId(), skill);
