@@ -38,12 +38,13 @@ public final class SkillManager {
             return false;
         }
 
-        if (isSkillActive(player.getUniqueId(), skill)) return deactivateSkill(player, skill);
-
         if (!isMoneyMode()) {
-            activate(player, skill, false);
+            // Free mode is an entitlement, not a timed session. Players must
+            // never have to open the GUI and click before using a skill.
             return true;
         }
+
+        if (isSkillActive(player.getUniqueId(), skill)) return deactivateSkill(player, skill);
 
         if (!plugin.getEconomyManager().isEnabled()) {
             TextUtil.send(plugin, player, "messages.vault-unavailable");
@@ -99,7 +100,7 @@ public final class SkillManager {
         return isEnabled(skill)
                 && hasSkillPermission(player, skill)
                 && isWorldEnabled(player.getWorld())
-                && isSkillActive(player.getUniqueId(), skill);
+                && (!isMoneyMode() || isSkillActive(player.getUniqueId(), skill));
     }
 
     public boolean isEnabled(String skill) {

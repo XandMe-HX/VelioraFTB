@@ -109,6 +109,9 @@ public final class SkillGUI implements Listener {
         } else if (!permitted) {
             status = plugin.getConfig().getString("gui.status.no-permission", "&cTidak memiliki izin");
             finalLine = "";
+        } else if (!plugin.getSkillManager().isMoneyMode()) {
+            status = "&aAktif otomatis — GRATIS";
+            finalLine = "&7Tidak perlu diaktifkan dari GUI.";
         } else if (active) {
             status = plugin.getConfig().getString("gui.status.active", "&aAktif");
             finalLine = TextUtil.replace(
@@ -139,7 +142,9 @@ public final class SkillGUI implements Listener {
 
         List<Component> lore = new ArrayList<>();
         lore.add(TextUtil.color(plugin.getSkillManager().isMoneyMode() ? "&6Aktivasi berikutnya: BERBAYAR" : "&aAktivasi berikutnya: GRATIS"));
-        if(active) {
+        if (!plugin.getSkillManager().isMoneyMode()) {
+            lore.add(TextUtil.color("&aSkill ini langsung aktif gratis selama kamu punya permission."));
+        } else if(active) {
             String mode=plugin.getSkillManager().activationMode(uuid,skill);
             lore.add(TextUtil.color("&7Sesi aktif: "+(mode.equals("paid")?"&6DIBELI":mode.equals("free")?"&aGRATIS":"&7LAMA (asal belum tercatat)")));
             lore.add(TextUtil.color("&eKlik untuk mematikan; sisa waktu sesi akan hilang."));

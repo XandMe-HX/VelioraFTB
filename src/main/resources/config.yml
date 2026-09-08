@@ -6,9 +6,6 @@ settings:
   payment-mode:
     # false = aktif gratis. true = harga Vault dipotong.
     money: false
-# ============================================================
-
-settings:
   require-vault-economy: true
   # Pengaman absolut agar salah ketik config tidak membekukan server.
   # Nilai ini juga tetap bisa kamu ubah.

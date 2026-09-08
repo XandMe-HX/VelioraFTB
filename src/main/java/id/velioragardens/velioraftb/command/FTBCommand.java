@@ -76,8 +76,11 @@ public final class FTBCommand implements CommandExecutor, TabCompleter {
     private void showStatus(Player player) {
         TextUtil.send(plugin, player, "messages.status-header");
         for (String skill : plugin.getSkillManager().getSkillKeys()) {
+            boolean freeAutomatic = !plugin.getSkillManager().isMoneyMode();
             boolean active = plugin.getSkillManager().isSkillActive(player.getUniqueId(), skill);
-            String status = active
+            String status = freeAutomatic
+                    ? "&aaktif otomatis (gratis)"
+                    : active
                     ? TextUtil.replace(
                             plugin.getConfig().getString("messages.status-active", "&aaktif, tersisa {time}"),
                             Map.of("time", plugin.getSkillManager().getRemainingFormatted(player.getUniqueId(), skill)))
